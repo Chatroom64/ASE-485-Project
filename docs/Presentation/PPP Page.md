@@ -130,7 +130,7 @@ Sprint 1-4: Measure/Time/Tempo logic
 
 Sprint 2-1: Finish Measure/Time/Tempo Logic and begin Rendering Setup
 
-Sprint 2-2: Finish Rendering Setup and  begin Playback Logic
+Sprint 2-2: Finish Rendering Setup and begin Playback Logic
 
 Sprint 2-3: Finalize Playback (Push The Limits!)
 
