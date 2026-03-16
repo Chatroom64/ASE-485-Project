@@ -31,7 +31,7 @@ This platform aims to be an easily-accessible music notation software that is si
     - Time signature (default: 4/4)
     - Key signature (default: C major)
     - Tempo (BPM)
--Save and load scores from persistent storage
+- Save and load scores from persistent storage
 
 ---
 
