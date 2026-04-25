@@ -1,8 +1,8 @@
-import { Score } from "../model/score";
-import { Note } from "../model/note";
-import { Staff } from "../model/staff";
-import { AddNoteCommand } from "../commands/addnote";
-import { ScoreRenderer } from "../renderer/scorerenderer";
+import { Score } from "../model/score.js";
+import { Note } from "../model/note.js";
+import { Staff } from "../model/staff.js";
+import { AddNoteCommand } from "../commands/addnote.js";
+import { ScoreRenderer } from "../renderer/scorerenderer.js";
 
 export class ScoreController {
 

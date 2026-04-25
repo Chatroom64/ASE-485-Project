@@ -1,6 +1,6 @@
-import { Command } from "./command"; // Sprint 2 placeholder
-import { Staff } from "../model/staff";
-import { Note } from "../model/note";
+import type { Command } from "./command.js";
+import { Staff } from "../model/staff.js";
+import { Note } from "../model/note.js";
 
 export class AddNoteCommand implements Command {
 
@@ -23,7 +23,10 @@ export class AddNoteCommand implements Command {
     // Placeholder undo
     const lastMeasure = this.staff.measures[this.staff.measures.length - 1];
 
+    if (!lastMeasure) throw new Error("Measure not found");
+
     lastMeasure.elements.pop();
+
 
     console.log("AddNoteCommand undone");
 

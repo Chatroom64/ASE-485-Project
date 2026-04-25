@@ -1,6 +1,6 @@
-import { Note } from "./note";
-import { Rest } from "./rest";
-import { TimeSignature } from "./timesignature";
+import { Note } from "./note.js";
+import { Rest } from "./rest.js";
+import { TimeSignature } from "./timesignature.js";
 
 export type MeasureElement = Note | Rest; // defined here because I have to import it here and likely won't need it anywhere else
 

@@ -1,5 +1,5 @@
-import { Score } from "../model/score";
-import { Serializer } from "./serializer";
+import { Score } from "../model/score.js";
+import { Serializer } from "./serializer.js";
 
 const STORAGE_KEY = "music_scores";
 

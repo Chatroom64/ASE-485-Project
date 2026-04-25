@@ -1,0 +1,8 @@
+.note {
+  fill: black;
+  cursor: pointer;
+}
+
+.note.selected {
+  fill: yellow;
+}

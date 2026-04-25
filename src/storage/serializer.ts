@@ -1,9 +1,9 @@
-import { Score } from "../model/score";
-import { Staff } from "../model/staff";
-import { Measure } from "../model/measure";
-import { Note } from "../model/note";
-import { Rest } from "../model/rest";
-import { TimeSignature } from "../model/timesignature";
+import { Score } from "../model/score.js";
+import { Staff } from "../model/staff.js";
+import { Measure } from "../model/measure.js";
+import { Note } from "../model/note.js";
+import { Rest } from "../model/rest.js";
+import { TimeSignature } from "../model/timesignature.js";
 
 export class Serializer {
 

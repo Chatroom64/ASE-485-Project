@@ -1,0 +1,1 @@
+{"version":3,"file":"scorerenderer.d.ts","sourceRoot":"","sources":["../../src/renderer/scorerenderer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,mBAAmB,CAAC;AAE1C,qBAAa,aAAa;IAGtB,OAAO,CAAC,GAAG;IACX,OAAO,CAAC,KAAK;gBADL,GAAG,EAAE,aAAa,EAClB,KAAK,EAAE,KAAK;IAGtB,MAAM,IAAI,IAAI;CA8Bf"}
