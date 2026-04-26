@@ -5,7 +5,7 @@ type PitchData = {
     octave: number
 }
 
-const TREBLE_NOTES: PitchData[] = [
+export const TREBLE_NOTES: PitchData[] = [
     {pitch:"C" , octave:4},
     {pitch:"D" , octave:4},
     {pitch:"E" , octave:4},
@@ -22,6 +22,7 @@ const TREBLE_NOTES: PitchData[] = [
     {pitch:"B" , octave:5},
     {pitch:"C" , octave:6}
 ]
+export const MIDDLE_LINE_INDEX = 6;
 
 export class PitchMapper {
     constructor(
@@ -31,7 +32,8 @@ export class PitchMapper {
     getPitchFromY(y: number):{pitch:PitchLetter, octave: number}{
         const bottomLineY = this.staffTop + 4 * this.lineSpacing;
         const stepSize = this.lineSpacing/2 // dividing by 2 allows the notes to go from line >> space rather than line >> line
-        const offset = Math.round((bottomLineY - y)/stepSize);
+        const E4_INDEX = 2;
+        const offset = Math.round((bottomLineY - y)/stepSize) + E4_INDEX;
         const index = Math.max(0, Math.min(TREBLE_NOTES.length - 1, offset));
         const note = TREBLE_NOTES[index];
         if (!note) throw new Error("No note");
