@@ -1,14 +1,14 @@
 import { Score } from "../model/score.js";
-import { Note } from "../model/note.js";
 import { Staff } from "../model/staff.js";
 import { ScoreRenderer } from "../renderer/scorerenderer.js";
+import type { MeasureElement } from "../model/measure.js";
 export declare class ScoreController {
     private score;
     private renderer;
     private commandHistory;
     private redoStack;
     constructor(score: Score, renderer: ScoreRenderer);
-    addNote(staff: Staff, note: Note): void;
+    addElement(staff: Staff, element: MeasureElement): void;
     undo(): void;
     redo(): void;
 }

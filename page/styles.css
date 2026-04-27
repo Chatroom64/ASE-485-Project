@@ -1,8 +1,8 @@
 .note {
-  fill: black;
+  stroke: black;
   cursor: pointer;
 }
 
-.note.selected {
+.note.selected, .note.hover {
   fill: yellow;
 }

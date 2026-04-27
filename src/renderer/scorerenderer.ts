@@ -18,7 +18,6 @@ export class ScoreRenderer {
   ) {}
 
   render(): void {
-
     console.log("Rendering score...");
 
     this.svg.innerHTML = "";
@@ -42,6 +41,7 @@ export class ScoreRenderer {
   
     this.svg.appendChild(line);
   }
+  
     
     // a LOT of helper functions after this point
     function getYFromPitch(
@@ -134,6 +134,36 @@ export class ScoreRenderer {
       svg.appendChild(line);
 
     }
+    function drawRest(
+      svg: SVGSVGElement,
+      x: number,
+      duration: string
+    ): void {
+
+      const y = STAFF_TOP + 2 * LINE_SPACING; // middle of staff
+
+      const text = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "text"
+      );
+
+      let symbol = "";
+
+      switch (duration) {
+        case "whole": symbol = "𝄻"; break;
+        case "half": symbol = "𝄼"; break;
+        case "quarter": symbol = "𝄽"; break;
+        case "eighth": symbol = "𝄾"; break;
+      }
+
+      text.textContent = symbol;
+
+      text.setAttribute("x", x.toString());
+      text.setAttribute("y", y.toString());
+      text.setAttribute("font-size", "20");
+
+      svg.appendChild(text);
+    }
 
     function getStepIndex(
       pitch: PitchLetter,
@@ -164,7 +194,6 @@ export class ScoreRenderer {
           const direction = getStemDirection(index);
           const y = getYFromPitch(el.pitch, el.octave);
           const filled = isFilled(el.duration);
-
           drawLedgerLines(this.svg, x, y, index); // ledger lines where necessary
 
           const circle = document.createElementNS( // notehead
@@ -187,10 +216,35 @@ export class ScoreRenderer {
           if (hasStem(el.duration)) drawStem(this.svg, x, y, direction);
           x += 30;
 
+        } 
+        if (el.type === "rest") {
+
+            drawRest(this.svg, x, el.duration);
+
+            x += 30;
+          }
         }
-        }
+      drawBarLine(this.svg, x);
+      x += 30;
       }
     }
+    function drawBarLine(svg: SVGSVGElement, x: number): void {
+
+  const line = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "line"
+  );
+
+  line.setAttribute("x1", x.toString());
+  line.setAttribute("x2", x.toString());
+
+  line.setAttribute("y1", STAFF_TOP.toString());
+  line.setAttribute("y2", (STAFF_TOP + 4 * LINE_SPACING).toString());
+
+  line.setAttribute("stroke", "black");
+
+  svg.appendChild(line);
+}
 
   }
 

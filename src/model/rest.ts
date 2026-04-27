@@ -1,6 +1,7 @@
 import type { Duration } from "./types.js";
 import { generateId } from "../utils/idgen.js"
 
+
 export class Rest{
     readonly type = "rest";
     readonly id: string;

@@ -1,10 +1,9 @@
-import type { Command } from "./command.js";
 import { Staff } from "../model/staff.js";
-import { Note } from "../model/note.js";
-export declare class AddNoteCommand implements Command {
+import type { MeasureElement } from "../model/measure.js";
+export declare class AddElementCommand {
     private staff;
-    private note;
-    constructor(staff: Staff, note: Note);
+    private element;
+    constructor(staff: Staff, element: MeasureElement);
     execute(): void;
     undo(): void;
 }

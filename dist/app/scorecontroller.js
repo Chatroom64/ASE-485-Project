@@ -1,8 +1,11 @@
 import { Score } from "../model/score.js";
 import { Note } from "../model/note.js";
 import { Staff } from "../model/staff.js";
-import { AddNoteCommand } from "../commands/addnote.js";
+import { AddElementCommand } from "../commands/addnote.js";
 import { ScoreRenderer } from "../renderer/scorerenderer.js";
+import { getDurationValue } from "../model/duration.js";
+import { Measure } from "../model/measure.js";
+import { BEATS_PER_MEASURE } from "../model/duration.js";
 export class ScoreController {
     constructor(score, renderer) {
         this.score = score;
@@ -10,8 +13,13 @@ export class ScoreController {
         this.commandHistory = [];
         this.redoStack = [];
     }
-    addNote(staff, note) {
-        const cmd = new AddNoteCommand(staff, note);
+    addElement(staff, element) {
+        const cmd = new AddElementCommand(staff, element);
+        const lastMeasure = staff.measures[staff.measures.length - 1];
+        if (!lastMeasure)
+            throw new Error("No measure found");
+        const value = getDurationValue(element.duration);
+        const currentBeats = lastMeasure.getTotalBeats();
         cmd.execute();
         this.commandHistory.push(cmd);
         this.redoStack = [];

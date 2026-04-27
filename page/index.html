@@ -2,8 +2,19 @@
     <head>
         <link rel="stylesheet" href="styles.css">
         <link rel="icon" href="assets/icons/favicon.png">
+        <title>HalfStep</title>
     </head>
     <body>
+        <div id="toolbar">
+            <button data-duration="whole">Whole</button>
+            <button data-duration="half">Half</button>
+            <button data-duration="quarter">Quarter</button>
+            <button data-duration="eighth">Eighth</button>
+        </div>
+        <div id="note_rest_selector">
+            <button data-tool="note">Note</button>
+            <button data-tool="rest">Rest</button>
+        </div>
         <div>
             <div>
                 <svg id="score" width="1200" height="600"></svg>

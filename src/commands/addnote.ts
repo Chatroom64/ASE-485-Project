@@ -1,21 +1,29 @@
 import type { Command } from "./command.js";
 import { Staff } from "../model/staff.js";
 import { Note } from "../model/note.js";
+import { Measure } from "../model/measure.js";
+import type  { MeasureElement } from "../model/measure.js";
 
-export class AddNoteCommand implements Command {
-
+export class AddElementCommand {
   constructor(
     private staff: Staff,
-    private note: Note
+    private element: MeasureElement
   ) {}
 
   execute(): void {
+    let currentMeasure = this.staff.measures[this.staff.measures.length - 1];
 
-    // Temporary placeholder logic
-    this.staff.addElement(this.note);
+    if (!currentMeasure) {
+      throw new Error("No measure found");
+    }
 
-    console.log("AddNoteCommand executed");
+    if (!currentMeasure.canAdd(this.element)) {
+      const newMeasure = new Measure(currentMeasure.timesignature);
+      this.staff.measures.push(newMeasure);
+      currentMeasure = newMeasure;
+    }
 
+    currentMeasure.addElement(this.element);
   }
 
   undo(): void {

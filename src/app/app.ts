@@ -15,18 +15,39 @@ const staff = new Staff();
 const renderer = new ScoreRenderer(svg, score);
 const controller = new ScoreController(score,renderer);
 const selectionManager = new SelectionManager(score);
-new MouseHandler(
+const ruleButtons = document.querySelectorAll("[data-duration]");
+const toolButtons = document.querySelectorAll("[data-tool]");
+const mouseHandler = new MouseHandler(
   svg, 
   selectionManager,
   controller,
   staff
 );
 
+toolButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tool = btn.getAttribute("data-tool");
+    if (!tool) return;
+
+    mouseHandler.setTool(tool as "note" | "rest");
+  });
+});
+ruleButtons.forEach (btn =>
+  btn.addEventListener("click", ()=>{
+    const duration = btn.getAttribute("data-duration");
+    if (!duration) return;
+    mouseHandler.setDuration(duration as any);
+  })
+)
+
+
+
 score.addStaff(staff);
 
 staff.addElement(
   new Note("C", 4, "quarter")
 );
+
 
 console.log(score);
 StorageService.saveCurrentScore(score);

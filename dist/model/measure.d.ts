@@ -9,5 +9,6 @@ export declare class Measure {
     getTotalBeats(): number;
     canAdd(element: MeasureElement): boolean;
     addElement(element: MeasureElement): boolean;
+    getMaxBeats(): number;
 }
 //# sourceMappingURL=measure.d.ts.map
