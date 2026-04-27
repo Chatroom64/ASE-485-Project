@@ -1,1 +1,1 @@
-{"version":3,"file":"deletenote.d.ts","sourceRoot":"","sources":["../../src/commands/deletenote.ts"],"names":[],"mappings":""}
+{"version":3,"file":"deletenote.d.ts","sourceRoot":"","sources":["../../src/commands/deletenote.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,mBAAmB,CAAC;AAC1C,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,qBAAqB,CAAC;AAE1D,qBAAa,oBAAoB;IAM7B,OAAO,CAAC,KAAK;IACb,OAAO,CAAC,OAAO;IALjB,OAAO,CAAC,YAAY,CAAS;IAC7B,OAAO,CAAC,YAAY,CAAS;gBAGnB,KAAK,EAAE,KAAK,EACZ,OAAO,EAAE,cAAc;IAYjC,OAAO,CAAC,WAAW;IAkBnB,OAAO,IAAI,IAAI;IAMf,IAAI,IAAI,IAAI;CAKb"}

@@ -39,6 +39,19 @@ ruleButtons.forEach (btn =>
     mouseHandler.setDuration(duration as any);
   })
 )
+document.addEventListener("keydown", (e) => {
+
+  if (e.key === "Delete") {
+
+    const selectedId = selectionManager.getSelectedNote();
+
+    if (!selectedId) return;
+
+    controller.deleteElement(staff, selectedId);
+
+  }
+
+});
 
 
 

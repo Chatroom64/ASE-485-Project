@@ -8,6 +8,7 @@ import type { MeasureElement } from "../model/measure.js";
 import { Measure } from "../model/measure.js";
 import { BEATS_PER_MEASURE } from "../model/duration.js";
 import type { MeasureElementType } from "../model/types.js";
+import { DeleteElementCommand } from "../commands/deletenote.js";
 
 export class ScoreController {
 
@@ -37,6 +38,17 @@ export class ScoreController {
 
     this.renderer.render();
     
+  }
+  deleteElement(staff: Staff, elementId: MeasureElement): void {
+
+    const cmd = new DeleteElementCommand(staff, elementId);
+
+    cmd.execute();
+
+    this.commandHistory.push(cmd);
+    this.redoStack = [];
+
+    this.renderer.render();
   }
   
 

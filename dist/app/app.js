@@ -31,6 +31,14 @@ ruleButtons.forEach(btn => btn.addEventListener("click", () => {
         return;
     mouseHandler.setDuration(duration);
 }));
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Delete") {
+        const selectedId = selectionManager.getSelectedNote();
+        if (!selectedId)
+            return;
+        controller.deleteElement(staff, selectedId);
+    }
+});
 score.addStaff(staff);
 staff.addElement(new Note("C", 4, "quarter"));
 console.log(score);

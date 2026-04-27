@@ -6,6 +6,7 @@ import { ScoreRenderer } from "../renderer/scorerenderer.js";
 import { getDurationValue } from "../model/duration.js";
 import { Measure } from "../model/measure.js";
 import { BEATS_PER_MEASURE } from "../model/duration.js";
+import { DeleteElementCommand } from "../commands/deletenote.js";
 export class ScoreController {
     constructor(score, renderer) {
         this.score = score;
@@ -20,6 +21,13 @@ export class ScoreController {
             throw new Error("No measure found");
         const value = getDurationValue(element.duration);
         const currentBeats = lastMeasure.getTotalBeats();
+        cmd.execute();
+        this.commandHistory.push(cmd);
+        this.redoStack = [];
+        this.renderer.render();
+    }
+    deleteElement(staff, elementId) {
+        const cmd = new DeleteElementCommand(staff, elementId);
         cmd.execute();
         this.commandHistory.push(cmd);
         this.redoStack = [];

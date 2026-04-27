@@ -2,7 +2,7 @@ import { Score } from "../model/score.js";
 import { Note } from "../model/note.js";
 export declare class SelectionManager {
     private score;
-    private selectedNoteId;
+    private selectedId;
     constructor(score: Score);
     selectNote(noteId: string): void;
     clearSelection(): void;

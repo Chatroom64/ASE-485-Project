@@ -9,6 +9,7 @@ export declare class ScoreController {
     private redoStack;
     constructor(score: Score, renderer: ScoreRenderer);
     addElement(staff: Staff, element: MeasureElement): void;
+    deleteElement(staff: Staff, elementId: MeasureElement): void;
     undo(): void;
     redo(): void;
 }
