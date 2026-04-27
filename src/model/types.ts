@@ -26,3 +26,5 @@ export type ClefType =
 export type MeasureElementType =
   | "note"
   | "rest";
+  
+  

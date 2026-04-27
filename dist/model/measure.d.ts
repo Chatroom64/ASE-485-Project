@@ -2,6 +2,10 @@ import { Note } from "./note.js";
 import { Rest } from "./rest.js";
 import { TimeSignature } from "./timesignature.js";
 export type MeasureElement = Note | Rest;
+export type PositionedElement = {
+    element: MeasureElement;
+    x: number;
+};
 export declare class Measure {
     timesignature: TimeSignature;
     elements: MeasureElement[];

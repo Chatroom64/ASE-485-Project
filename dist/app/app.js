@@ -6,17 +6,24 @@ import { SelectionManager } from "../input/selectionmanager.js";
 import { MouseHandler } from "../input/mousehandler.js";
 import { ScoreController } from "./scorecontroller.js";
 import { ScoreRenderer } from "../renderer/scorerenderer.js";
+import { PlaybackEngine } from "../playback/playbackengine.js";
+import { downloadScore } from "../export/midiexporter.js";
+import { loadScoreFromFile } from "../export/midiexporter.js";
 const svg = document.getElementById("score");
 if (!(svg instanceof SVGSVGElement))
     throw new Error("Element #score is not an SVG element");
 const score = new Score("My Score");
 const staff = new Staff();
 const renderer = new ScoreRenderer(svg, score);
+const playbackEngine = new PlaybackEngine(renderer);
 const controller = new ScoreController(score, renderer);
 const selectionManager = new SelectionManager(score);
 const ruleButtons = document.querySelectorAll("[data-duration]");
 const toolButtons = document.querySelectorAll("[data-tool]");
 const mouseHandler = new MouseHandler(svg, selectionManager, controller, staff);
+document.getElementById("playBtn")?.addEventListener("click", () => {
+    playbackEngine.play(staff, 120);
+});
 toolButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         const tool = btn.getAttribute("data-tool");
@@ -38,6 +45,17 @@ document.addEventListener("keydown", (e) => {
             return;
         controller.deleteElement(staff, selectedId);
     }
+});
+document.getElementById("exportBtn")?.addEventListener("click", () => {
+    downloadScore(score);
+});
+document.getElementById("importInput")?.addEventListener("change", async (e) => {
+    const file = e.target.files?.[0];
+    if (!file)
+        return;
+    const newScore = await loadScoreFromFile(file);
+    controller.setScore(newScore);
+    renderer.render();
 });
 score.addStaff(staff);
 staff.addElement(new Note("C", 4, "quarter"));

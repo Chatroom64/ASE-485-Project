@@ -6,6 +6,9 @@ import { SelectionManager } from "../input/selectionmanager.js";
 import { MouseHandler } from "../input/mousehandler.js"
 import { ScoreController } from "./scorecontroller.js";
 import { ScoreRenderer } from "../renderer/scorerenderer.js";
+import { PlaybackEngine } from "../playback/playbackengine.js";
+import { downloadScore } from "../export/midiexporter.js";
+import { loadScoreFromFile } from "../export/midiexporter.js";
 
 const svg = document.getElementById("score");
 
@@ -13,6 +16,7 @@ if (!(svg instanceof SVGSVGElement)) throw new Error("Element #score is not an S
 const score = new Score("My Score");
 const staff = new Staff();
 const renderer = new ScoreRenderer(svg, score);
+const playbackEngine = new PlaybackEngine(renderer);
 const controller = new ScoreController(score,renderer);
 const selectionManager = new SelectionManager(score);
 const ruleButtons = document.querySelectorAll("[data-duration]");
@@ -24,6 +28,9 @@ const mouseHandler = new MouseHandler(
   staff
 );
 
+document.getElementById("playBtn")?.addEventListener("click", () => {
+  playbackEngine.play(staff, 120);
+});
 toolButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     const tool = btn.getAttribute("data-tool");
@@ -50,6 +57,20 @@ document.addEventListener("keydown", (e) => {
     controller.deleteElement(staff, selectedId);
 
   }
+
+});
+document.getElementById("exportBtn")?.addEventListener("click", () => {
+  downloadScore(score);
+});
+document.getElementById("importInput")?.addEventListener("change", async (e) => {
+
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (!file) return;
+
+  const newScore = await loadScoreFromFile(file);
+
+  controller.setScore(newScore);
+  renderer.render();
 
 });
 

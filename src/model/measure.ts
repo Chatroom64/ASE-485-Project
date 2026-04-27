@@ -4,7 +4,10 @@ import { TimeSignature } from "./timesignature.js";
 import { getDurationValue } from "./duration.js";
 
 export type MeasureElement = Note | Rest; // defined here because I have to import it here and likely won't need it anywhere else
-
+export type PositionedElement = {
+      element: MeasureElement;
+      x: number;
+    };
 export class Measure{
     elements: MeasureElement[] = [];
     constructor(

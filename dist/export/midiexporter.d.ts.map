@@ -1,1 +1,1 @@
-{"version":3,"file":"midiexporter.d.ts","sourceRoot":"","sources":["../../src/export/midiexporter.ts"],"names":[],"mappings":""}
+{"version":3,"file":"midiexporter.d.ts","sourceRoot":"","sources":["../../src/export/midiexporter.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,KAAK,EAAE,MAAM,mBAAmB,CAAC;AAC1C,OAAO,KAAK,EAAE,SAAS,EAAE,MAAM,sBAAsB,CAAC;AAKtD,wBAAgB,WAAW,CAAC,KAAK,EAAE,KAAK,GAAG,SAAS,CA0BnD;AACD,wBAAgB,aAAa,CAAC,KAAK,EAAE,KAAK,GAAG,IAAI,CAkBhD;AACD,wBAAgB,WAAW,CAAC,IAAI,EAAE,SAAS,GAAG,KAAK,CAmClD;AACD,wBAAgB,iBAAiB,CAAC,IAAI,EAAE,IAAI,GAAG,OAAO,CAAC,KAAK,CAAC,CAqB5D"}

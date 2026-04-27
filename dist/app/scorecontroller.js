@@ -33,6 +33,10 @@ export class ScoreController {
         this.redoStack = [];
         this.renderer.render();
     }
+    setScore(score) {
+        this.score = score;
+        this.renderer.render();
+    }
     undo() {
         const cmd = this.commandHistory.pop();
         if (!cmd)

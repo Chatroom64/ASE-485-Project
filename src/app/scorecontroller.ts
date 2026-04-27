@@ -50,6 +50,10 @@ export class ScoreController {
 
     this.renderer.render();
   }
+  setScore(score: Score): void {
+  this.score = score;
+  this.renderer.render();
+}
   
 
   undo(): void {

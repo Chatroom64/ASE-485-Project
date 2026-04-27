@@ -11,10 +11,47 @@ export class ScoreRenderer {
     constructor(svg, score) {
         this.svg = svg;
         this.score = score;
+        this.playhead = null;
+    }
+    createPlayhead() {
+        // avoid duplicates
+        if (this.playhead)
+            return;
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("y1", STAFF_TOP.toString());
+        line.setAttribute("y2", (STAFF_TOP + 4 * LINE_SPACING).toString());
+        line.setAttribute("stroke", "red");
+        line.setAttribute("stroke-width", "2");
+        // start off-screen (or at beginning)
+        line.setAttribute("x1", "0");
+        line.setAttribute("x2", "0");
+        this.svg.appendChild(line);
+        this.playhead = line;
+    }
+    movePlayhead(x) {
+        if (!this.playhead)
+            return;
+        this.playhead.setAttribute("x1", x.toString());
+        this.playhead.setAttribute("x2", x.toString());
+    }
+    getPositionedElements() {
+        const result = [];
+        let x = 50;
+        for (const staff of this.score.staves) {
+            for (const measure of staff.measures) {
+                for (const el of measure.elements) {
+                    result.push({ element: el, x });
+                    x += 30;
+                }
+                x += 10; // bar spacing
+            }
+        }
+        return result;
     }
     render() {
         console.log("Rendering score...");
         this.svg.innerHTML = "";
+        this.createPlayhead();
         let x = 50;
         for (let i = 0; i < 5; i++) {
             const y = STAFF_TOP + i * LINE_SPACING;

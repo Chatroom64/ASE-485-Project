@@ -1,6 +1,7 @@
 import { Score } from "../model/score.js"; // Sprint 2 placeholder 
 import { TREBLE_NOTES, MIDDLE_LINE_INDEX } from "../utils/pitchmapper.js";
 import type { PitchLetter } from "../model/types.js";
+import type { PositionedElement } from "../model/measure.js";
 
 const STAFF_TOP = 100;
 const LINE_SPACING = 12;
@@ -16,11 +17,63 @@ export class ScoreRenderer {
     private svg: SVGSVGElement,
     private score: Score
   ) {}
+  private playhead: SVGLineElement | null = null;
+  createPlayhead(): void {
 
+  // avoid duplicates
+  if (this.playhead) return;
+
+  const line = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "line"
+  );
+
+  line.setAttribute("y1", STAFF_TOP.toString());
+  line.setAttribute("y2", (STAFF_TOP + 4 * LINE_SPACING).toString());
+
+  line.setAttribute("stroke", "red");
+  line.setAttribute("stroke-width", "2");
+
+  // start off-screen (or at beginning)
+  line.setAttribute("x1", "0");
+  line.setAttribute("x2", "0");
+
+  this.svg.appendChild(line);
+
+  this.playhead = line;
+}
+movePlayhead(x: number): void {
+  if (!this.playhead) return;
+
+  this.playhead.setAttribute("x1", x.toString());
+  this.playhead.setAttribute("x2", x.toString());
+}
+getPositionedElements(): PositionedElement[] {
+
+  const result: PositionedElement[] = [];
+
+  let x = 50;
+
+  for (const staff of this.score.staves) {
+    for (const measure of staff.measures) {
+      for (const el of measure.elements) {
+
+        result.push({ element: el, x });
+
+        x += 30;
+      }
+
+      x += 10; // bar spacing
+    }
+  }
+
+  return result;
+}
   render(): void {
     console.log("Rendering score...");
 
     this.svg.innerHTML = "";
+    this.createPlayhead();
     let x = 50;
 
     for (let i = 0; i < 5; i++) {
@@ -40,6 +93,7 @@ export class ScoreRenderer {
     line.setAttribute("stroke", "black");
   
     this.svg.appendChild(line);
+    
   }
   
     
@@ -183,7 +237,10 @@ export class ScoreRenderer {
       return duration !== "whole";
     }
 
+    
+
     //end helper functions    
+    
 
     for(const staff of this.score.staves){
       for(const measure of staff.measures){
@@ -209,7 +266,6 @@ export class ScoreRenderer {
 
           circle.setAttribute("data-id", el.id);
           circle.classList.add("note");
-          
 
           this.svg.appendChild(circle);
 
